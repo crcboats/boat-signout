@@ -1,0 +1,42 @@
+<span id="cal-slide-tick" style="display: none"></span>
+<div id="cal-slide-content" class="cal-event-list">
+<div class="text-center">
+</div>
+	<ul class="unstyled list-unstyled">
+		<% _.each(events, function(event) { %>
+			<li id="<%= event.id %>">
+				<a href="/profile/_<%= event.encryptedUserName %>"><img src="/<%= event.pictureUrl %>" style="height: 40px; width: 40px; margin:2px;"></a>&nbsp;
+				<b><%= event.start_hour %> - <%= event.end_hour %></b>, <%= event.boatName %>, <%= event.userDisplayName %> &nbsp;
+				<%if(event.canDelete){ %> <span data-id="<%= event.id %>" data-event="<%= event.start_hour %> - <%= event.end_hour %> <%= event.boatName %>" class="glyphicon glyphicon-trash"></span> <%}%>
+			</li>
+		<% }) %>
+	</ul>
+</div>
+<script>
+$(".glyphicon-trash").click(function(e){
+		bootbox.confirm(
+				"Are you sure you want to delete this entry?<br>" + $(e.target).data("event"),
+				function(ok) {
+					if(ok){
+						$.ajax({
+							type: "DELETE",
+							url: "reserve/" + $(e.target).data("id"),
+							dataType: "json",
+							success: function(data)
+							{
+								if (data.Result != "ERROR") {
+									location.reload(); 
+								} else {
+									bootbox.alert(data.Message);
+								}
+							},
+							error: function(data)
+							{
+								 bootbox.alert(data);
+							}
+						});
+					}
+				}			
+			);
+	});
+</script>

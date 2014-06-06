@@ -1,0 +1,5 @@
+sourceRoot: ../ftl
+replaceExtensions: [ftl,html, fjs, js]
+data: {
+    tdd(data/const.tdd)
+}

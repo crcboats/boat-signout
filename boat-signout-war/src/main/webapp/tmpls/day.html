@@ -1,0 +1,31 @@
+<table class="table">
+	<thead>
+		<tr>
+			<th>Time</th>
+			<th>Boat</th>
+			<th></th>
+			<th>Rower</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% _.each(all_day, function(event){ %>
+		<tr>
+			<td><b>All day</b></td>
+			<td><%= event.boatName %></td>
+			<td><a href="/profile/_<%= event.encryptedUserName %>"><img src="/<%= event.pictureUrl %>" style="height: 40px; width: 40px; margin:2px;"></a></td>
+			<td><%= event.userDisplayName %></td>
+			<td><%if(event.canDelete){ %> <span data-id="<%= event.id %>" data-event="<%= event.start_hour %> - <%= event.end_hour %> <%= event.boatName %>" class="glyphicon glyphicon-trash"></span> <%}%>
+			</td>
+		</tr>
+		<% }); %> <% _.each(by_hour, function(event){ %>
+		<tr>
+			<td><b><%= event.start_hour %> - <%= event.end_hour %></b></td>
+			<td><%= event.boatName %></td>
+			<td><a href="profile/_<%= event.encryptedUserName %>"><img src="<%= event.pictureUrl %>" style="height: 40px; width: 40px; margin:2px;"></a></td>
+			<td><%= event.userDisplayName %></td>
+			<td><%if(event.canDelete){ %> <span data-id="<%= event.id %>" data-event="<%= event.start_hour %> - <%= event.end_hour %> <%= event.boatName %>" class="glyphicon glyphicon-trash"></span> <%}%></td>
+		</tr>
+		<% }); %>
+	</tbody>
+</table>
