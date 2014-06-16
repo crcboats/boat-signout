@@ -30,8 +30,8 @@
                             <div class="input">
                                 <input id="username" name="username" value="${(RequestParameters.username)!}" type="hidden"/>
                             </div>
-                            <legend>Please fill in the password and the retype field</legend>
-                            <div class="clearfix">
+                            <legend>Please create a password for your account and click register.</legend>
+                            <div class="clearfix" style="display:none">
                                 <label for="confirmCode">Code received</label>
 
                                 <div class="input">

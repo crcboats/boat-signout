@@ -79,9 +79,8 @@
             <div class="row" id="stage2" style="display:none">
                 <div class="span12">
                     <p>Please wait for an email which will
-                       provide you with a key, and a link.  Enter the key and choose a password
-                       to complete your registration.</p>
-                    <form id="passwordSetForm" action="${userBaseUrl}/confirm" method="POST" autocomplete="off">
+                       provide you with a link. When you receive the email click on the link to complete your registration.</p>
+                    <form id="passwordSetForm" action="${userBaseUrl}/confirm" method="POST" autocomplete="off" style="display:none">
                         <fieldset>
                             <legend>Please fill in the code, password and the retype field</legend>
                             <div class="clearfix">

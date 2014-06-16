@@ -7,12 +7,3 @@ changing your password
 registration
 </#if>
 </a></p>
-<p>Alternatively type the following code into the appropriate field
-   on the
-<#if forgot??>
-change password
-<#else>
-registration
-</#if>
-page</p>
-<p><pre>${code!}</pre></p>
