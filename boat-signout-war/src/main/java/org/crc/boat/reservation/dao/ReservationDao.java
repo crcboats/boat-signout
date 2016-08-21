@@ -4,6 +4,7 @@ package org.crc.boat.reservation.dao;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -39,6 +40,17 @@ public class ReservationDao {
 		return list;
 		
 	}
+	
+	public List<Reservation> listReservations(Long from, Long to){
+        LOG.info("List reservations from " + new Date(from) + " to " + new Date(to));
+        List<Reservation> list = ofy().load().type(Reservation.class)
+                .filter("end >=", from)
+                .filter("end <=", to)
+                .list();
+        LOG.info("Number of reservations: " + (list != null ? list.size() : "null") );
+        return list;
+        
+    }
 	
 	public List<Reservation> hasConflict(Reservation r){
 	    List<Reservation> conflicts = new ArrayList<>();

@@ -47,7 +47,9 @@ public class ReservationServlet extends BaseServlet  {
         reserveTime,
         duration,
         units,
-        allowConflicts
+        allowConflicts,
+        from,
+        to
     };
     
     private static final Map<String, Long> UNITS_TO_SECONDS_MAP = new HashMap<String, Long>(){{
@@ -72,13 +74,22 @@ public class ReservationServlet extends BaseServlet  {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Reservation> reservations = reservationDao.listReservations();
         GaeUser currentGaeUser = getCurrentGaeUser();
         if(currentGaeUser == null){
             LOG.info("User not logged in.");
             resp.sendRedirect("/logout");
             return;
         }
+
+        List<String> errors = new ArrayList<>();
+        String from = getAndValidate(PARAMETER.from, req, errors);
+        String to = getAndValidate(PARAMETER.to, req, errors);
+        if(!errors.isEmpty()){
+            mapper.writeValue(resp.getOutputStream(), new JsonErrorResponse(StringUtils.join(errors, "<br>")));
+            return;
+        }
+        
+        List<Reservation> reservations = reservationDao.listReservations(Long.valueOf(from), Long.valueOf(to));
         for (Reservation reservation : reservations) {
             reservation.setCanDelete(currentGaeUser.getName().equals(reservation.getUserName()));
         }
