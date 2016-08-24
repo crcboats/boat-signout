@@ -45,7 +45,8 @@ public class ReservationDao {
         LOG.info("List reservations from " + new Date(from) + " to " + new Date(to));
         List<Reservation> list = ofy().load().type(Reservation.class)
                 .filter("end >=", from)
-                .filter("end <=", to)
+//            Inequality filters are limited to at most one property and adding 
+//            .filter("end <=", to) would filter reservations longer than the from to range  
                 .list();
         LOG.info("Number of reservations: " + (list != null ? list.size() : "null") );
         return list;
