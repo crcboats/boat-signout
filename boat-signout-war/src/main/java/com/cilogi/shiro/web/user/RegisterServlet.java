@@ -32,11 +32,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.api.taskqueue.RetryOptions;
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Sha256Hash;
-import org.apache.shiro.util.ByteSource;
-import org.apache.shiro.util.SimpleByteSource;
+import org.apache.shiro.lang.util.ByteSource;
+import org.apache.shiro.lang.util.SimpleByteSource;
 import org.apache.shiro.web.util.WebUtils;
 
 import com.cilogi.shiro.gae.GaeUser;
@@ -102,7 +103,9 @@ public class RegisterServlet extends BaseServlet {
                         .withUrl(userBaseUrl + "/registermail")
                         .param(USERNAME, userName)
                         .param(FORGOT, Boolean.toString(isForgot))
-                        .param(REGISTRATION_STRING, registrationString));
+                        .param(REGISTRATION_STRING, registrationString)
+                        .retryOptions(RetryOptions.Builder.withTaskRetryLimit(0))
+                );
 
                 issueJson(response, HTTP_STATUS_OK,
                         MESSAGE, "ok");

@@ -52,7 +52,7 @@
 									<div class="form-group col-xs-8">
 										<label class="control-label" for="reserveDate">Date</label>
 										<div class="input-group date" id="reserveDate" style="width: 200px" >
-											<input id='date-time-input' name="reserveDate" type="text" class="form-control" /> 
+											<input id='date-input' name="reserveDate" type="text" class="form-control" />
 											<span class="input-group-addon">
 												<span class="glyphicon glyphicon-calendar"></span> 
 											</span>
@@ -64,7 +64,7 @@
 									<div class="form-group col-xs-8">
 										<label class="control-label" for="reserveTime">Time</label>
 										<div class="input-group date" id="reserveTime" style="width: 200px" >
-											<input id='date-time-input' name="reserveTime" type="text" class="form-control" /> 
+											<input id='time-input' name="reserveTime" type="text" class="form-control" />
 											<span class="input-group-addon">
 												<span class="glyphicon glyphicon-clock"></span> 
 											</span>

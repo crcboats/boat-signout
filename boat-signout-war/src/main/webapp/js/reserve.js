@@ -35,18 +35,12 @@ function getUrlVar(key){
 				// datetimepicker to match the view and default the time to 6:00 am.
 				var dp = $('#reserveDate').data("DateTimePicker");
 				var tp = $('#reserveTime').data("DateTimePicker");
+				tp.setValue(localStorage.getItem("time-input"));
+				$('#duration').val(localStorage.getItem("duration"));
+				$('#unit').val(localStorage.getItem("unit"));
 				var viewDate = moment(this.getStartDate()).format('YYYY-MM-DD');
-				if(!$("#date-time-input").val() || viewDate != dp.getDate().format('YYYY-MM-DD')){
+				if(!$("#date-input").val() || viewDate != dp.getDate().format('YYYY-MM-DD')){
 					dp.setValue(viewDate);
-					var defaultHour = moment().hour();
-					if(defaultHour < 5 || defaultHour > 21){
-						defaultHour = 6;
-					}
-					if(defaultHour > 12){
-						tp.setValue((defaultHour -12) + ':00 PM');						
-					} else {
-						tp.setValue(defaultHour + ':00 AM');	
-					}
 				}
 				
 				$(".glyphicon-trash").click(function(e){
@@ -93,6 +87,7 @@ function getUrlVar(key){
 		var newDate = e.date.format('YYYY-MM-DD');
 		calendar.options.day = newDate;
 		calendar.view();
+		location.href = "dayview.ftl?dt=" + newDate;
 	});
 
 	$('.btn-group button[data-calendar-nav]').each(function() {
@@ -137,7 +132,7 @@ function getUrlVar(key){
 			});
 		});
 		$("#boat").select2({ data: boatData});
-		var previous = $.cookie("boat");
+		var previous = localStorage.getItem("boat");
 		if(previous){
 			$("#boat").select2("val", previous);
 			updateWarning();
@@ -148,7 +143,7 @@ function getUrlVar(key){
 		$('#reserveForm').bootstrapValidator('resetForm');
 		calendar.options.boat = e.val;
 		calendar.view();
-		$.cookie("boat", e.val);
+		localStorage.setItem("boat", e.val);
 		updateWarning();		
 	});
 	
@@ -158,6 +153,10 @@ function getUrlVar(key){
 			return false;
 		}
 		var spin = shiro.spin.start($("#spinner"));
+		localStorage.setItem("time-input", $("#time-input").val());
+		localStorage.setItem("boat", $("#boat").val());
+		localStorage.setItem("duration", $("#duration").val());
+		localStorage.setItem("units", $("#units").val());
 		$.ajax({
 			type: "POST",
 			url: "reserve",
@@ -186,7 +185,7 @@ function getUrlVar(key){
 			error: function(data)
 			{
 				spin.stop();
-				bootbox.alert(data);
+				location.href = "/";
 			}
 		});
 

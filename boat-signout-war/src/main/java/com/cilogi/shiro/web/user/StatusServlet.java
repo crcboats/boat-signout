@@ -72,7 +72,7 @@ public class StatusServlet extends BaseServlet {
         LOG.info("status GET");
         try {
             Subject subject = SecurityUtils.getSubject();
-            boolean isKnown = subject.isAuthenticated() || subject.isRemembered();
+            boolean isKnown = subject.isAuthenticated();
             if (isKnown) {
                 GaeUser currentGaeUser = getCurrentGaeUser();
                 LOG.info("status, known: " + currentGaeUser.getName());

@@ -106,7 +106,7 @@ THE SOFTWARE.
             picker.component = false;
 
             if (picker.element.hasClass('input-group')) {
-                if (picker.element.find('.datepickerbutton').size() == 0) {//in case there is more then one 'input-group-addon' Issue #48
+                if (picker.element.find('.datepickerbutton').length === 0) {//in case there is more than one 'input-group-addon' Issue #48
                     picker.component = picker.element.find("[class^='input-group-']");
                 }
                 else {

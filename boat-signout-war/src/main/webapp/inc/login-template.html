@@ -15,13 +15,6 @@
             </div>
             <a id="loginForgot" style="margin-left:150px;" href="/register.ftl?forgot=true">Forgot your password?</a>
         </div>
-      <!-- /clearfix -->
-        <div class="clearfix">
-            <label for="rememberMe" style="padding-top: 0;">Remember me</label>
-            <div class="input">
-                <input id="rememberMe" name="rememberMe" type="checkbox"/>
-            </div>
-        </div>
     </fieldset>
     <div class="actions">
         <button id="modalLogin" type="submit" class="btn primary">Login</button>

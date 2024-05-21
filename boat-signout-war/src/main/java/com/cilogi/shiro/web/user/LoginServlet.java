@@ -59,9 +59,8 @@ public class LoginServlet extends BaseServlet {
         try {
             String password = WebUtils.getCleanParam(request, PASSWORD);
             String username = WebUtils.getCleanParam(request, USERNAME);
-            boolean rememberMe = WebUtils.isTrue(request, REMEMBER_ME);
             String host = request.getRemoteHost();
-            UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe, host);
+            UsernamePasswordToken token = new UsernamePasswordToken(username, password, false, host);
             try {
                 Subject subject = SecurityUtils.getSubject();
                 loginWithNewSession(token, subject);

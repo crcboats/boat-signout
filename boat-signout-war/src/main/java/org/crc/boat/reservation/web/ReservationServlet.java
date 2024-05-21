@@ -134,6 +134,10 @@ public class ReservationServlet extends BaseServlet  {
         long end = start + duration * unitInSeconds;
         
         GaeUser user = getCurrentGaeUser();
+        if (user == null) {
+            issueJson(resp, HTTP_STATUS_FORBIDDEN, MESSAGE, "Session expired");
+            return;
+        }
         Reservation reservation = new Reservation();
         reservation.setBoatName(boat);
         reservation.setUserName(user.getName());

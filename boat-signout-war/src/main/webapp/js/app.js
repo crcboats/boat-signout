@@ -45,19 +45,6 @@ function pad(s) { return (s < 10) ? '0' + s : s; }
 			swipeVelocityX: 0.4,
 			swipeVelocityY: 0.3
 	};
-	var hammertime = new Hammer(document.getElementById('calendar'), options);
-
-	hammertime.on("swipeleft", function(ev) {
-		console.log(ev);
-		calendar.navigate('prev');
-		ev.gesture.preventDefault();
-	});
-	hammertime.on("swiperight", function(ev) {
-		console.log(ev);
-		calendar.navigate('next');
-		ev.gesture.preventDefault();
-	});
-
 
 	$("#reserveButtonForm").submit(function() {
 
