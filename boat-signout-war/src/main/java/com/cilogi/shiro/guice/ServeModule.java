@@ -24,6 +24,7 @@ package com.cilogi.shiro.guice;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import com.cilogi.shiro.web.SessionCleanupServlet;
 import org.apache.shiro.web.servlet.ShiroFilter;
 import org.crc.boat.reservation.web.BoatServlet;
 import org.crc.boat.reservation.web.ProfilePictureServlet;
@@ -86,6 +87,7 @@ public class ServeModule extends ServletModule {
         serve("/_ah/mail/*").with(MailReceiveServlet.class);
         serve("/appstats/*").with(AppstatsServlet.class);
         serve("/cron/wake").with(WakeServlet.class);
+        serve("/cron/sessioncleanup").with(SessionCleanupServlet.class);
 
         serve("/boats*").with(BoatServlet.class);
         serve("/reserve*").with(ReservationServlet.class);

@@ -4,4 +4,8 @@
         <url>/cron/wake</url>
         <schedule>every 1 minutes</schedule>
     </cron>
+    <cron>
+        <url>/cron/sessioncleanup?clear</url>
+        <schedule>every 60 minutes</schedule>
+    </cron>
 </cronentries>
