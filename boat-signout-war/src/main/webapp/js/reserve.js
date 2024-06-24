@@ -152,7 +152,7 @@ function getUrlVar(key){
 			bootbox.alert($("#boat").select2('data').text + " is not rowable<br>" + $("#boat").select2('data').warningMessage);
 			return false;
 		}
-		if(!$("#boat").select2('data').event){
+		if($("#boat").select2('data').event){
 			allowConflicts = true;
 		}
 		var spin = shiro.spin.start($("#spinner"));
