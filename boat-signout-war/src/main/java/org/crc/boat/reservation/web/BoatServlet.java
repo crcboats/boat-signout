@@ -81,11 +81,23 @@ public class BoatServlet extends HttpServlet {
             return;
         }
         Boat boat = new Boat(name);
+
+        String displayName = req.getParameter("displayName");
+        if(displayName != null && !displayName.trim().isEmpty()) {
+            boat.setDisplayName(displayName);
+        }
+
         String rowable = req.getParameter("rowable");
         if(rowable == null || "false".equalsIgnoreCase(rowable)){
             boat.setRowable(false);
         }else{
             boat.setRowable(true);
+        }
+        String event = req.getParameter("event");
+        if(event == null || "false".equalsIgnoreCase(event)){
+            boat.setEvent(false);
+        }else{
+            boat.setEvent(true);
         }
         boat.setWarningMessage(req.getParameter("warningMessage"));
         Boat savedBoat = boatDao.saveBoat(boat);

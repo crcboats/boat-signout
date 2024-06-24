@@ -16,7 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.crc.boat.reservation.dao.BoatDao;
 import org.crc.boat.reservation.dao.ReservationDao;
+import org.crc.boat.reservation.model.Boat;
 import org.crc.boat.reservation.model.Reservation;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -37,6 +39,7 @@ public class ReservationServlet extends BaseServlet  {
 
     
     private ReservationDao reservationDao;
+    private BoatDao boatDao;
     ObjectMapper mapper = new ObjectMapper();
     final DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd h:mm a").withZone(DateTimeZone.forID("America/Toronto"));
     
@@ -66,9 +69,11 @@ public class ReservationServlet extends BaseServlet  {
     }};
     
     @Inject
-    ReservationServlet(ReservationDao reservationDAO, Provider<GaeUserDAO> daoProvider) {
+    ReservationServlet(ReservationDao reservationDAO, Provider<GaeUserDAO> daoProvider,
+                       BoatDao boatDao) {
         super(daoProvider);
         this.reservationDao = reservationDAO;
+        this.boatDao = boatDao;
     }
 
     @Override
@@ -140,6 +145,10 @@ public class ReservationServlet extends BaseServlet  {
         }
         Reservation reservation = new Reservation();
         reservation.setBoatName(boat);
+        String boatDisplayName = boatDao.getBoat(boat)
+                .map(Boat::getDisplayName)
+                .orElse(boat);
+        reservation.setBoatDisplayName(boatDisplayName);
         reservation.setUserName(user.getName());
         String displayName = user.getDisplayName();
         if(StringUtils.isBlank(displayName)){

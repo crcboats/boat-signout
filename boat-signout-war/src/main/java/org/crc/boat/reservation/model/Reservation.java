@@ -15,7 +15,8 @@ public class Reservation {
     
     @Index 
     String boatName;
-    
+    String boatDisplayName;
+
     String title;
     
     @Index 
@@ -98,5 +99,12 @@ public class Reservation {
     public String getEncryptedUserName(){
         return Crypto.encrypt(this.userName);
     }
-    
+
+    public String getBoatDisplayName() {
+        return boatDisplayName == null ? boatName : boatDisplayName;
+    }
+
+    public void setBoatDisplayName(String boatDisplayName) {
+        this.boatDisplayName = boatDisplayName;
+    }
 }

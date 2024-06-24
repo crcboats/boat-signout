@@ -43,7 +43,7 @@
 								<!-- Select Boat -->
 								<div class="row">
 									<div class="form-group col-xs-8">
-										<label class="control-label" for="boat">Boat</label><br> 
+										<label class="control-label" for="boat">Boat/Event</label><br>
 										<input name="boat" id="boat" style="width: 200px"  />
 									</div>
 								</div>

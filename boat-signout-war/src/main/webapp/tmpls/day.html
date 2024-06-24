@@ -12,19 +12,19 @@
 		<% _.each(all_day, function(event){ %>
 		<tr>
 			<td><b>All day</b></td>
-			<td><%= event.boatName %></td>
+			<td><%= event.boatDisplayName %></td>
 			<td><a href="/profile/_<%= event.encryptedUserName %>"><img src="/<%= event.pictureUrl %>" style="height: 40px; width: 40px; margin:2px;"></a></td>
 			<td><%= event.userDisplayName %></td>
-			<td><%if(event.canDelete){ %> <span data-id="<%= event.id %>" data-event="<%= event.start_hour %> - <%= event.end_hour %> <%= event.boatName %>" class="glyphicon glyphicon-trash"></span> <%}%>
+			<td><%if(event.canDelete){ %> <span data-id="<%= event.id %>" data-event="<%= event.start_hour %> - <%= event.end_hour %> <%= event.boatDisplayName %>" class="glyphicon glyphicon-trash"></span> <%}%>
 			</td>
 		</tr>
 		<% }); %> <% _.each(by_hour, function(event){ %>
 		<tr>
 			<td><b><%= event.start_hour %> - <%= event.end_hour %></b></td>
-			<td><%= event.boatName %></td>
+			<td><%= event.boatDisplayName %></td>
 			<td><a href="profile/_<%= event.encryptedUserName %>"><img src="<%= event.pictureUrl %>" style="height: 40px; width: 40px; margin:2px;"></a></td>
 			<td><%= event.userDisplayName %></td>
-			<td><%if(event.canDelete){ %> <span data-id="<%= event.id %>" data-event="<%= event.start_hour %> - <%= event.end_hour %> <%= event.boatName %>" class="glyphicon glyphicon-trash"></span> <%}%></td>
+			<td><%if(event.canDelete){ %> <span data-id="<%= event.id %>" data-event="<%= event.start_hour %> - <%= event.end_hour %> <%= event.boatDisplayName %>" class="glyphicon glyphicon-trash"></span> <%}%></td>
 		</tr>
 		<% }); %>
 	</tbody>

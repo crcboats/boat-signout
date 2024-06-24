@@ -126,7 +126,7 @@ function getUrlVar(key){
 		$.each( data.Records, function( i, val ) {
 			boatData.push( {
 				id: val.name, 
-				text: val.name, 
+				text: val.displayName,
 				rowable: val.rowable, 
 				warningMessage: val.warningMessage 
 			});
@@ -151,6 +151,9 @@ function getUrlVar(key){
 		if(!$("#boat").select2('data').rowable){
 			bootbox.alert($("#boat").select2('data').text + " is not rowable<br>" + $("#boat").select2('data').warningMessage);
 			return false;
+		}
+		if(!$("#boat").select2('data').event){
+			allowConflicts = true;
 		}
 		var spin = shiro.spin.start($("#spinner"));
 		localStorage.setItem("time-input", $("#time-input").val());

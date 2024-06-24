@@ -7,8 +7,9 @@ import com.googlecode.objectify.annotation.Id;
 public class Boat {
 	@Id
 	String name;
-	
+	String displayName;
 	boolean rowable = true;
+    boolean event = false;
 	String warningMessage;
 	
 	public Boat() {
@@ -18,6 +19,7 @@ public class Boat {
 	public Boat(String name) {
         super();
         this.name = name;
+        this.displayName = name;
     }
 
     public String getName() {
@@ -41,6 +43,22 @@ public class Boat {
 
     public void setWarningMessage(String warningMessage) {
         this.warningMessage = warningMessage;
+    }
+
+    public boolean isEvent() {
+        return event;
+    }
+
+    public void setEvent(boolean event) {
+        this.event = event;
+    }
+
+    public String getDisplayName() {
+        return displayName == null ? name : displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     @Override

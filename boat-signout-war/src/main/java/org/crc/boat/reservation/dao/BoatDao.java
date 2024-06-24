@@ -4,6 +4,7 @@ package org.crc.boat.reservation.dao;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import org.crc.boat.reservation.model.Boat;
@@ -37,5 +38,10 @@ public class BoatDao {
 		LOG.info("Number of boats: " + (list != null ? list.size() : "null") );
 		return list;
 		
+	}
+
+	public Optional<Boat> getBoat(String  key){
+		Boat boat = ofy().load().type(Boat.class).id(key).now();
+		return Optional.ofNullable(boat);
 	}
 }

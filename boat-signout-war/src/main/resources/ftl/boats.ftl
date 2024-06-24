@@ -46,6 +46,12 @@ $(document).ready(function () {
         		title: 'Boat name',
                 width: '30%'                
             },
+            displayName: {
+                create: true,
+                title: 'Display name',
+                type: 'textarea',
+                width: '30%'
+            },
         	rowable: {
         		type: 'checkbox',
         		create: true,
@@ -54,11 +60,19 @@ $(document).ready(function () {
             	values: { 'false': 'not rowable', 'true': 'rowable' },
                 width: '10%'                
             },
+            event: {
+                type: 'checkbox',
+                create: true,
+                default: 'false',
+                title: 'Event/Boat',
+                values: { 'false': 'boat', 'true': 'event' },
+                width: '10%'
+            },
         	warningMessage: {
         		create: true,
             	title: 'Warning message',
             	type: 'textarea',
-                width: '60%'                
+                width: '30%'
             }
         }
     });
