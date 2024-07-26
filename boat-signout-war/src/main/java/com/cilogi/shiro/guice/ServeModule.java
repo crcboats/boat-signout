@@ -43,8 +43,8 @@ import com.cilogi.shiro.web.user.SettingsServlet;
 import com.cilogi.shiro.web.user.StatusServlet;
 import com.cilogi.shiro.web.user.UserListServlet;
 import com.cilogi.shiro.web.user.UserSuspendServlet;
-import com.google.appengine.tools.appstats.AppstatsFilter;
-import com.google.appengine.tools.appstats.AppstatsServlet;
+//import com.google.appengine.tools.appstats.AppstatsFilter;
+//import com.google.appengine.tools.appstats.AppstatsServlet;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.google.inject.servlet.ServletModule;
@@ -66,7 +66,7 @@ public class ServeModule extends ServletModule {
         LOG.warning(userBaseUrl);
         filter("/*").through(ShiroFilter.class);
         filter("/*").through(AsyncCacheFilter.class);
-        filter("/*").through(AppstatsFilter.class, map("calculateRpcCosts", "true"));
+//        filter("/*").through(AppstatsFilter.class, map("calculateRpcCosts", "true"));
 
         serve("*.ftl").with(FreemarkerServlet.class);
 
@@ -85,7 +85,7 @@ public class ServeModule extends ServletModule {
         serve("/login").with(LoginServlet.class);
             // Lets check mail to see when stuff bounces
         serve("/_ah/mail/*").with(MailReceiveServlet.class);
-        serve("/appstats/*").with(AppstatsServlet.class);
+//        serve("/appstats/*").with(AppstatsServlet.class);
         serve("/cron/wake").with(WakeServlet.class);
         serve("/cron/sessioncleanup").with(SessionCleanupServlet.class);
 

@@ -77,7 +77,15 @@ public class GaeUserDAO extends BaseDAO<GaeUser> {
     }
 
     public GaeUser findUser(String userName) {
-        return get(userName);
+        GaeUser gaeUser = get(userName.toLowerCase());
+        if (gaeUser == null || !gaeUser.isRegistered()) {
+            //workaround for bug where users were creating usernames with uppercase case characters
+            GaeUser caseSensitiveUser = get(userName);
+            if (caseSensitiveUser != null && caseSensitiveUser.isRegistered()) {
+                return caseSensitiveUser;
+            }
+        }
+        return gaeUser;
     }
 
     /**

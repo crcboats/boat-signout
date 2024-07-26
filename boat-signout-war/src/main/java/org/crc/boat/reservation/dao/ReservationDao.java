@@ -52,6 +52,20 @@ public class ReservationDao {
         return list;
         
     }
+
+	public boolean riverIsRowable(Reservation r){
+		List<Reservation> conflicts = new ArrayList<>();
+		List<Reservation> newStartLtExistingEnd = ofy().load().type(Reservation.class)
+				.filter("boatName", "River Not Safe For Rowing")
+				.filter("end >", Long.valueOf(r.getStart()))
+				.list();
+		for (Reservation existing : newStartLtExistingEnd) {
+			if(r.getEnd() > existing.getStart()){
+				return false;
+			}
+		}
+		return true;
+	}
 	
 	public List<Reservation> hasConflict(Reservation r){
 	    List<Reservation> conflicts = new ArrayList<>();

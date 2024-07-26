@@ -159,8 +159,16 @@ public class ReservationServlet extends BaseServlet  {
         reservation.setStart(start);
         reservation.setEnd(end);
         reservation.setPictureUrl(StringUtils.isBlank(user.getPictureUrl()) ? "img/rower.png" : user.getPictureUrl());
-        
+
         if(!"true".equals(allowConflicts)){
+            if(!reservationDao.riverIsRowable(reservation)) {
+                String message = "The river is not safe for rowing. " +
+                        "<b>Do not row club boats until flow rate is below 100 m<sup>3</sup>/s</b>";
+                JsonErrorResponse error = new JsonErrorResponse(message);
+                error.ErrorType = "RIVER_NOT_ROWABLE";
+                mapper.writeValue(resp.getOutputStream(), error);
+                return;
+            }
             List<Reservation> conflicts = reservationDao.hasConflict(reservation);
             if(conflicts != null && !conflicts.isEmpty()){
                 List<String> messages = new ArrayList<>();

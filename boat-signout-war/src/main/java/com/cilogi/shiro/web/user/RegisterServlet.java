@@ -70,6 +70,9 @@ public class RegisterServlet extends BaseServlet {
             GaeUserDAO dao = new GaeUserDAO();
 
             String userName = WebUtils.getCleanParam(request, USERNAME);
+            if (userName != null) {
+                userName = userName.toLowerCase();
+            }
             String displayName = WebUtils.getCleanParam(request, DISPLAYNAME);
             String proofOfMembershipCode = WebUtils.getCleanParam(request, PROOF_OF_MEMBERSHIP_CODE);
             String validCode = settingsDao.getSetting(PROOF_OF_MEMBERSHIP_CODE);

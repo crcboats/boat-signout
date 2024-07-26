@@ -30,8 +30,8 @@ import org.apache.shiro.web.servlet.ShiroFilter;
 
 import com.cilogi.util.doc.CreateDoc;
 import com.google.appengine.api.utils.SystemProperty;
-import com.google.appengine.tools.appstats.AppstatsFilter;
-import com.google.appengine.tools.appstats.AppstatsServlet;
+//import com.google.appengine.tools.appstats.AppstatsFilter;
+//import com.google.appengine.tools.appstats.AppstatsServlet;
 import com.google.common.base.Charsets;
 import com.google.inject.AbstractModule;
 import com.google.inject.Scopes;
@@ -58,8 +58,8 @@ public class ServeLogic extends AbstractModule {
     protected void configure() {
         bind(CreateDoc.class).toInstance(createDoc());
         bind(ShiroFilter.class).in(Scopes.SINGLETON);
-        bind(AppstatsServlet.class).in(Scopes.SINGLETON);
-        bind(AppstatsFilter.class).in(Scopes.SINGLETON);
+//        bind(AppstatsServlet.class).in(Scopes.SINGLETON);
+//        bind(AppstatsFilter.class).in(Scopes.SINGLETON);
         bind(AsyncCacheFilter.class).in(Scopes.SINGLETON);// needed to sync the datastore if its running async
         bindString("email.from", "crcboats@gmail.com");
         bindString("userBaseUrl", userBaseUrl);
@@ -78,9 +78,7 @@ public class ServeLogic extends AbstractModule {
             cfg.setSharedVariable("userBaseUrl", userBaseUrl);
             cfg.setSharedVariable("staticBaseUrl", staticBaseUrl);
             return create;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (TemplateModelException e) {
+        } catch (IOException | TemplateModelException e) {
             throw new RuntimeException(e);
         }
     }

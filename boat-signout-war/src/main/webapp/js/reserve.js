@@ -171,15 +171,27 @@ function getUrlVar(key){
 				if (data.Result != "ERROR") {
 					location.reload();
 				} else {
-					if(data.ErrorType && data.ErrorType == "CONFLICT"){
-						bootbox.confirm(
-							"The time conflicts with the following existing reservations: <br><br>" +  data.Message +" <br><br>Do you want to save anyway?",
-							function(ok) {
-								if(ok){
-									submitHandler(validator, form, submitButton, true);
+					if(data.ErrorType){
+						if (data.ErrorType === "CONFLICT"){
+							bootbox.confirm(
+								"The time conflicts with the following existing reservations: <br><br>" +  data.Message +" <br><br>Do you want to save anyway?",
+								function(ok) {
+									if(ok){
+										submitHandler(validator, form, submitButton, true);
+									}
 								}
-							}			
-						);
+							);
+						}
+						if (data.ErrorType === "RIVER_NOT_ROWABLE"){
+							bootbox.confirm(
+								data.Message +" <br><br>Do you want to save anyway?",
+								function(ok) {
+									if(ok){
+										submitHandler(validator, form, submitButton, true);
+									}
+								}
+							);
+						}
 					} else {
 						bootbox.alert(data.Message);
 					}
